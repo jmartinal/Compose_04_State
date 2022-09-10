@@ -16,8 +16,14 @@ import com.example.compose04state.ui.theme.Compose04StateTheme
 fun WaterCounter(modifier: Modifier = Modifier) {
     var count by remember { mutableStateOf(0) }
     Column(modifier = modifier.padding(16.dp)) {
-        Text(text = "You've had $count glasses.")
-        Button(onClick = { count++ }) {
+        if (count > 0) {
+            Text(text = "You've had $count glasses.")
+        }
+        Button(
+            onClick = { count++ },
+            enabled = count < 10,
+            modifier = modifier.padding(top = 8.dp)
+        ) {
             Text(text = "Add one")
         }
     }
