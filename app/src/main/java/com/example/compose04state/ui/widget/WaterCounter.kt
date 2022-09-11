@@ -19,36 +19,18 @@ fun WaterCounter(modifier: Modifier = Modifier) {
     var count by remember { mutableStateOf(0) }
     Column(modifier = modifier.padding(16.dp)) {
         if (count > 0) {
-            var showTask by remember { mutableStateOf(true) }
-            if (showTask) {
-                WellnessTaskItem(
-                    taskName = "Have you taken your 15 minute walk today?",
-                    onClose = { showTask = false }
-                )
-            }
             Text(
                 text = "You've had $count glasses.",
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
-        Row(horizontalArrangement = Arrangement.Center) {
-            Button(
-                onClick = { count++ },
-                enabled = count < 10,
-                modifier = modifier
-                    .padding(top = 8.dp, end = 8.dp)
-                    .weight(1F)
-            ) {
-                Text(text = "Add one")
-            }
-            Button(
-                onClick = { count = 0 },
-                modifier = modifier
-                    .padding(top = 8.dp, start = 8.dp)
-                    .weight(1F)
-            ) {
-                Text(text = "Clear water count")
-            }
+        Button(
+            onClick = { count++ },
+            enabled = count < 10,
+            modifier = modifier
+                .padding(top = 8.dp, end = 8.dp)
+        ) {
+            Text(text = "Add one")
         }
     }
 }
