@@ -12,10 +12,14 @@ import com.example.compose04state.data.getWellnessTasks
 import com.example.compose04state.ui.theme.Compose04StateTheme
 
 @Composable
-fun WellnessTasksList(modifier: Modifier = Modifier) {
+fun WellnessTasksList(
+    tasks: List<WellnessTask>,
+    onDismissTask: (WellnessTask) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(modifier = modifier) {
-        items(WellnessTask.getWellnessTasks()) { wellnessTask ->
-            StatefulWellnessTaskItem(taskName = wellnessTask.label)
+        items(items = tasks, key = { task -> task.id }) { task ->
+            StatefulWellnessTaskItem(taskName = task.label, onClose = { onDismissTask(task) })
         }
     }
 }
@@ -28,7 +32,7 @@ fun WellnessTasksList(modifier: Modifier = Modifier) {
 fun WellnessTasksListLight() {
     Compose04StateTheme {
         Surface {
-            WellnessTasksList()
+            WellnessTasksList(WellnessTask.getWellnessTasks(), { /* no-op */ })
         }
     }
 }
@@ -42,7 +46,7 @@ fun WellnessTasksListLight() {
 fun WellnessTasksListDark() {
     Compose04StateTheme {
         Surface {
-            WellnessTasksList()
+            WellnessTasksList(WellnessTask.getWellnessTasks(), { /* no-op */ })
         }
     }
 }

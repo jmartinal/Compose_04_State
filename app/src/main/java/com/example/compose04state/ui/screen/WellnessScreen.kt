@@ -5,8 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.compose04state.data.WellnessTask
+import com.example.compose04state.data.getWellnessTasks
 import com.example.compose04state.ui.theme.Compose04StateTheme
 import com.example.compose04state.ui.widget.StatefulWaterCounter
 import com.example.compose04state.ui.widget.WellnessTasksList
@@ -15,7 +19,9 @@ import com.example.compose04state.ui.widget.WellnessTasksList
 fun WellnessScreen(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         StatefulWaterCounter()
-        WellnessTasksList()
+
+        val tasks = remember { WellnessTask.getWellnessTasks().toMutableStateList() }
+        WellnessTasksList(tasks = tasks, onDismissTask = { task -> tasks.remove(task) })
     }
 }
 

@@ -15,16 +15,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose04state.data.WellnessTask
 import com.example.compose04state.ui.theme.Compose04StateTheme
 
 @Composable
-fun StatefulWellnessTaskItem(taskName: String, modifier: Modifier = Modifier) {
+fun StatefulWellnessTaskItem(
+    taskName: String,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     var checkedState by rememberSaveable { mutableStateOf(false) }
     StatelessWellnessTaskItem(
         taskName = taskName,
         checked = checkedState,
         onCheckedChange = { checkedState = !checkedState },
-        onClose = { /* no-op */ },
+        onClose = onClose,
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)
     )
 }
