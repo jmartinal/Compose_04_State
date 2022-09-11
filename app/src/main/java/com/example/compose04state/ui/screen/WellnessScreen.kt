@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.compose04state.ui.theme.Compose04StateTheme
-import com.example.compose04state.ui.widget.WaterCounter
+import com.example.compose04state.ui.widget.StatefulWaterCounter
 
 @Composable
 fun WellnessScreen(modifier: Modifier = Modifier) {
-    WaterCounter(modifier)
+    StatefulWaterCounter(modifier = modifier)
 }
 
 @Preview(name = "light", showBackground = true)
