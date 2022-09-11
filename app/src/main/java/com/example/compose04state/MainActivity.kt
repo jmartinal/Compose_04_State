@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.compose04state.ui.screen.WellnessScreen
+import com.example.compose04state.ui.screen.wellness.WellnessScreen
 import com.example.compose04state.ui.theme.Compose04StateTheme
 
 class MainActivity : ComponentActivity() {

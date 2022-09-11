@@ -1,4 +1,4 @@
-package com.example.compose04state.ui.screen
+package com.example.compose04state.ui.screen.wellness
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.compose04state.data.WellnessTask
 import com.example.compose04state.data.getWellnessTasks
 import com.example.compose04state.ui.theme.Compose04StateTheme
@@ -16,12 +17,18 @@ import com.example.compose04state.ui.widget.StatefulWaterCounter
 import com.example.compose04state.ui.widget.WellnessTasksList
 
 @Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
+fun WellnessScreen(
+    modifier: Modifier = Modifier,
+    wellnessViewModel: WellnessViewModel = viewModel()
+) {
     Column(modifier = modifier) {
         StatefulWaterCounter()
 
-        val tasks = remember { WellnessTask.getWellnessTasks().toMutableStateList() }
-        WellnessTasksList(tasks = tasks, onDismissTask = { task -> tasks.remove(task) })
+        val tasks = remember { wellnessViewModel.tasks }
+        WellnessTasksList(
+            tasks = tasks,
+            onDismissTask = { task -> wellnessViewModel.removeTask(task) }
+        )
     }
 }
 
