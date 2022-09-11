@@ -7,6 +7,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,10 +18,38 @@ import androidx.compose.ui.unit.dp
 import com.example.compose04state.ui.theme.Compose04StateTheme
 
 @Composable
-fun WellnessTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
-            Text(text = taskName, modifier = Modifier.weight(1F))
+fun StatefulWellnessTaskItem(taskName: String, modifier: Modifier = Modifier) {
+    var checkedState by rememberSaveable { mutableStateOf(false) }
+    StatelessWellnessTaskItem(
+        taskName = taskName,
+        checked = checkedState,
+        onCheckedChange = { checkedState = !checkedState },
+        onClose = { /* no-op */ },
+        modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+    )
+}
+
+@Composable
+fun StatelessWellnessTaskItem(
+    taskName: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(elevation = 2.dp, modifier = modifier) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = taskName,
+                modifier = Modifier.weight(1F)
+            )
+            Checkbox(
+                checked = checked,
+                onCheckedChange = onCheckedChange
+            )
             IconButton(onClick = onClose) {
                 Icon(Icons.Filled.Close, contentDescription = null)
             }
@@ -33,7 +65,7 @@ fun WellnessTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier =
 private fun WellnessTaskItemLight() {
     Compose04StateTheme {
         Surface {
-            WellnessTaskItem("This is a task", { /* no-op */ })
+            StatelessWellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
         }
     }
 }
@@ -47,7 +79,7 @@ private fun WellnessTaskItemLight() {
 private fun WellnessTaskItemDark() {
     Compose04StateTheme {
         Surface {
-            WellnessTaskItem("This is a task", { /* no-op */ })
+            StatelessWellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
         }
     }
 }

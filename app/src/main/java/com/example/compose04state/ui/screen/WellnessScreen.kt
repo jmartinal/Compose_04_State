@@ -1,6 +1,7 @@
 package com.example.compose04state.ui.screen
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -8,10 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.compose04state.ui.theme.Compose04StateTheme
 import com.example.compose04state.ui.widget.StatefulWaterCounter
+import com.example.compose04state.ui.widget.WellnessTasksList
 
 @Composable
 fun WellnessScreen(modifier: Modifier = Modifier) {
-    StatefulWaterCounter(modifier = modifier)
+    Column(modifier = modifier) {
+        StatefulWaterCounter()
+        WellnessTasksList()
+    }
 }
 
 @Preview(name = "light", showBackground = true)
