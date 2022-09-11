@@ -15,4 +15,8 @@ class WellnessViewModel: ViewModel() {
 
     fun removeTask(task: WellnessTask) = _tasks.remove(task)
 
+    fun toggleTaskChecked(task: WellnessTask) = _tasks
+        .find { wellnessTask -> wellnessTask.id == task.id }
+        ?.let { task.checked = !task.checked }
+
 }

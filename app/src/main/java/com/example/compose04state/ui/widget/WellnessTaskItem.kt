@@ -7,35 +7,14 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose04state.data.WellnessTask
 import com.example.compose04state.ui.theme.Compose04StateTheme
 
 @Composable
-fun StatefulWellnessTaskItem(
-    taskName: String,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var checkedState by rememberSaveable { mutableStateOf(false) }
-    StatelessWellnessTaskItem(
-        taskName = taskName,
-        checked = checkedState,
-        onCheckedChange = { checkedState = !checkedState },
-        onClose = onClose,
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-    )
-}
-
-@Composable
-fun StatelessWellnessTaskItem(
+fun WellnessTaskItem(
     taskName: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
@@ -70,7 +49,7 @@ fun StatelessWellnessTaskItem(
 private fun WellnessTaskItemLight() {
     Compose04StateTheme {
         Surface {
-            StatelessWellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
+            WellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
         }
     }
 }
@@ -84,7 +63,7 @@ private fun WellnessTaskItemLight() {
 private fun WellnessTaskItemDark() {
     Compose04StateTheme {
         Surface {
-            StatelessWellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
+            WellnessTaskItem("This is a task", true, { /* no-op */ }, { /* no-op */ })
         }
     }
 }
